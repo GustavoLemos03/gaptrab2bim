@@ -9,13 +9,15 @@
       <v-spacer></v-spacer>
 
       <v-tabs centered color="grey-darken-2">
+        <v-tab> <router-link to="/">Home</router-link> </v-tab>
+
         <v-tab> <router-link to="/frutas">Estoque de Frutas</router-link>
 
         </v-tab>
-        <v-tab> <router-link to="/cadastro">Cadastre-se</router-link>
+        <v-tab> <router-link to="/cadastro">Clientes</router-link>
 
         </v-tab>
-        <v-tab> <router-link to="/compras">Comprar</router-link>
+        <v-tab> <router-link to="/compras">Encomendas</router-link>
 
         </v-tab>
       </v-tabs>

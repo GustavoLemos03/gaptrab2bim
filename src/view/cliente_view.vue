@@ -1,11 +1,13 @@
 <template>
     <v-main class="bg-grey-lighten-3">
         <v-container>
+
             <v-row>
 
                 <v-col cols="12" sm="12">
-                    <h1 class="center">Frutas</h1>
+                    <h1 class="center">Clientes</h1>
                     <v-sheet min-height="70vh" rounded="lg" class="pa-12">
+
                         <v-row justify="space-around">
 
                             <v-col cols="5">
