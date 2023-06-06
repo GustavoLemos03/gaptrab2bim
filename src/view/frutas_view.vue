@@ -14,7 +14,7 @@
                                 <v-card width="400" v-for="i in frutas" :key="i" class="ma-3 bg-grey-lighten-3">
                                     <div class="d-flex flex-no-wrap justify-space-between">
                                         <div>
-                                            <v-card-title class="text-h5">
+                                            <v-card-title class="text-h6">
                                                 {{ i.item }}
                                             </v-card-title>
 
