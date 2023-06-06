@@ -17,7 +17,7 @@
         <v-tab> <router-link to="/cadastro">Clientes</router-link>
 
         </v-tab>
-        <v-tab> <router-link to="/compras">Encomendas</router-link>
+        <v-tab> <router-link to="/encomendas">Encomendas</router-link>
 
         </v-tab>
       </v-tabs>
