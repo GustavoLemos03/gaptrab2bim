@@ -142,12 +142,12 @@ export default {
 
             if (this.qtd != '' && this.item != '') {
                 if (this.alter == false) {
-                    this.frutas.push({ item: this.item.toUpperCase(), qtd: this.qtd, cod: this.frutas.length + 1 })
+                    this.frutas.push({ item: this.item, qtd: this.qtd, cod: this.frutas.length + 1 })
 
                     this.save();
                 } else {
                     var index_edit = this.frutas.findIndex((x) => x.cod === this.cod);
-                    this.frutas[index_edit] = { cod: this.cod, item: this.item.toUpperCase(), qtd: this.qtd }
+                    this.frutas[index_edit] = { cod: this.cod, item: this.item, qtd: this.qtd }
                     this.alter = true;
 
                     this.save();
@@ -155,8 +155,8 @@ export default {
 
             }
 
-            this.item = null
-            this.qtd = null
+            this.item = ''
+            this.qtd = ''
             this.alter = false
         },
         removeItem(index) {
@@ -164,7 +164,6 @@ export default {
 
             this.frutas.splice(index_remove, 1)
             this.save();
-
 
         },
         edit(index) {
@@ -190,8 +189,8 @@ export default {
             
         },
         async validate() {
+            
             const { valid } = await this.$refs.form.validate()
-
             if (valid) this.addList()
         },
         reset() {
