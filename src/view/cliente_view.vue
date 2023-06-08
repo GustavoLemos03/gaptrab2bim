@@ -5,10 +5,85 @@
             <v-row>
 
                 <v-col cols="12" sm="12">
-                    <h1 class="center">Clientes</h1>
-                    <v-sheet min-height="70vh" rounded="lg" class="pa-12">
+
+                    <v-sheet min-height="100vh" rounded="lg" class="pa-12">
 
                         <v-row justify="space-around">
+                            <v-col cols="5" v-if="cliente.length != 0">
+                                <v-card width="400" v-for="i in cliente" :key="i" class="ma-3 bg-grey-lighten-3">
+                                    <div class="d-flex flex-no-wrap justify-space-between">
+                                        <div>
+                                            <v-card-title class="text-h5">
+                                                {{ i.nomecliente }}
+                                            </v-card-title>
+
+                                            <v-card-text>
+                                                <p>CPF: {{ i.cpf }}</p>
+                                                <p>email: {{ i.email }}</p>
+                                                <p>Telefone: {{ i.telefone }}</p>
+                                                <p>Rua: {{ i.rua }} N°: {{ i.numero }}</p>
+                                                <p>Cidade: {{ i.cidade }}</p>
+                                            </v-card-text>
+
+
+
+                                            <v-card-actions>
+                                                <v-btn class="ms-2" icon="mdi-delete" variant="text"
+                                                    @click="removeItem(i.cod)"></v-btn>
+
+                                                <v-btn class="ms-2" icon="mdi-pencil" variant="text"
+                                                    @click="edit(i.cod)"></v-btn>
+                                            </v-card-actions>
+                                        </div>
+
+
+                                    </div>
+                                </v-card>
+                            </v-col>
+                            <v-col cols="5" v-if="cliente.length == 0">
+                                <v-card width="400" class="ma-3 bg-grey-lighten-3">
+                                    <div class="d-flex flex-no-wrap justify-center">
+                                        <div>
+                                            <v-card-title class="text-h5">
+                                                Nenhum cliente cadastrado!
+                                            </v-card-title>
+
+                                            <v-avatar class="ma-3" size="125" rounded="0">
+                                                <v-img src="../../public/cliente.png"></v-img>
+                                            </v-avatar>
+
+                                        </div>
+
+
+                                    </div>
+                                </v-card>
+
+
+
+                                <div class="ml-7 mt-15">
+                                    <h3> Pesquisar </h3>
+                                <v-row>
+                                    <v-col cols="10">
+                                        <v-form ref="form">
+                                            <v-text-field v-model="pesq" label="Nome do cliente" variant="underlined"
+                                                required id="pesq"></v-text-field>
+
+
+                                        </v-form>
+
+                                    </v-col>
+                                    <v-col cols="auto">
+                                        <v-btn icon="mdi-magnify" size="small" color="primary" @click="pesquisar()"></v-btn>
+                                    </v-col>
+                                </v-row>
+
+                                <p v-if="found.length != 0">{{ (found.nomecliente) }}/ CPF: {{ found.cpf }}</p>
+                                <p v-if="noresults">Nenhum cliente cadastrado com esse nome</p>
+                                </div>
+
+
+
+                            </v-col>
 
                             <v-col cols="5">
                                 <v-form ref="form">
@@ -47,57 +122,11 @@
                                     </div>
 
                                 </v-form>
+
                             </v-col>
 
-                            <v-col cols="5" v-if="cliente.length != 0">
-                                <v-card width="400" v-for="i in cliente" :key="i" class="bg-grey-lighten-3">
-                                    <div class="d-flex flex-no-wrap justify-space-between">
-                                        <div>
-                                            <v-card-title class="text-h5">
-                                                {{ i.nomecliente }}
-                                            </v-card-title>
-                                            
-                                            <v-card-text>
-                                                <p>CPF: {{ i.cpf }}</p>
-                                                <p>email: {{ i.email }}</p>
-                                                <p>Telefone: {{ i.telefone }}</p>
-                                                <p>Rua: {{ i.rua }}  N°: {{ i.numero }}</p>
-                                                <p>Cidade: {{ i.cidade }}</p>
-                                            </v-card-text>
-
-                                            
-
-                                            <v-card-actions>
-                                                <v-btn class="ms-2" icon="mdi-delete" variant="text"
-                                                    @click="removeItem(i.cod)"></v-btn>
-
-                                                <v-btn class="ms-2" icon="mdi-pencil" variant="text"
-                                                    @click="edit(i.cod)"></v-btn>
-                                            </v-card-actions>
-                                        </div>
 
 
-                                    </div>
-                                </v-card>
-                            </v-col>
-                            <v-col cols="5" v-if="cliente.length == 0">
-                                <v-card width="400" class="bg-grey-lighten-3">
-                                    <div class="d-flex flex-no-wrap justify-center">
-                                        <div>
-                                            <v-card-title class="text-h5">
-                                                Nenhum cliente cadastrado!
-                                            </v-card-title>
-
-                                            <v-avatar class="ma-3" size="125" rounded="0">
-                                                <v-img src="../../public/cliente.png"></v-img>
-                                            </v-avatar>
-
-                                        </div>
-
-
-                                    </div>
-                                </v-card>
-                            </v-col>
                         </v-row>
 
 
@@ -127,7 +156,10 @@ export default {
 
         alter: false,
         cliente: [],
-        cod: ''
+        cod: '',
+        pesq: '',
+        found: [],
+        noresults: false
     }),
 
     methods: {
@@ -140,8 +172,8 @@ export default {
 
             if (this.alter == false) {
                 this.cliente.push({ cod: this.cliente.length + 1, nomecliente: this.nomecliente, cpf: this.cpf, email: this.email, telefone: this.telefone, rua: this.rua, numero: this.numero, cidade: this.cidade })
-               
-                 this.save(); 
+
+                this.save();
             } else {
                 var index_edit = this.cliente.findIndex((x) => x.cod === this.cod);
                 this.cliente[index_edit] = { cod: this.cliente.length + 1, nomecliente: this.nomecliente, cpf: this.cpf, email: this.email, telefone: this.telefone, rua: this.rua, numero: this.numero, cidade: this.cidade }
@@ -180,6 +212,18 @@ export default {
             this.numero = this.cliente[index_edit].numero;
             this.cidade = this.cliente[index_edit].cidade;
         },
+        pesquisar() {
+            var search = this.cliente.find(e => e.nomecliente == this.pesq);
+
+            if (search != undefined) {
+                this.found = search
+                this.noresults = false
+            } else {
+                this.noresults = true
+                this.found = []
+            }
+
+        },
         async validate() {
             const { valid } = await this.$refs.form.validate()
 
@@ -194,3 +238,9 @@ export default {
     },
 }
 </script>
+
+<style>
+#pesq {
+    text-transform: uppercase;
+}
+</style>
