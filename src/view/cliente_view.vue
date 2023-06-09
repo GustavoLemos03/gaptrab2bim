@@ -39,6 +39,29 @@
 
                                     </div>
                                 </v-card>
+
+                                <div class="ml-7 mt-15">
+                                    <h3> Pesquisar </h3>
+                                    <v-row>
+                                        <v-col cols="10">
+                                            <v-form ref="form">
+                                                <v-text-field v-model="pesq" label="Nome do cliente" variant="underlined"
+                                                    required id="pesq"></v-text-field>
+
+
+                                            </v-form>
+
+                                        </v-col>
+                                        <v-col cols="auto">
+                                            <v-btn icon="mdi-magnify" size="small" color="primary"
+                                                @click="pesquisar()"></v-btn>
+                                        </v-col>
+                                    </v-row>
+
+                                    <p v-if="found.length != 0">{{ (found.nomecliente) }}/ CPF: {{ found.cpf }}</p>
+                                    <p v-if="noresults">Nenhum cliente cadastrado com esse nome</p>
+                                </div>
+
                             </v-col>
                             <v-col cols="5" v-if="cliente.length == 0">
                                 <v-card width="400" class="ma-3 bg-grey-lighten-3">
@@ -62,23 +85,24 @@
 
                                 <div class="ml-7 mt-15">
                                     <h3> Pesquisar </h3>
-                                <v-row>
-                                    <v-col cols="10">
-                                        <v-form ref="form">
-                                            <v-text-field v-model="pesq" label="Nome do cliente" variant="underlined"
-                                                required id="pesq"></v-text-field>
+                                    <v-row>
+                                        <v-col cols="10">
+                                            <v-form ref="form">
+                                                <v-text-field v-model="pesq" label="Nome do cliente" variant="underlined"
+                                                    required id="pesq"></v-text-field>
 
 
-                                        </v-form>
+                                            </v-form>
 
-                                    </v-col>
-                                    <v-col cols="auto">
-                                        <v-btn icon="mdi-magnify" size="small" color="primary" @click="pesquisar()"></v-btn>
-                                    </v-col>
-                                </v-row>
+                                        </v-col>
+                                        <v-col cols="auto">
+                                            <v-btn icon="mdi-magnify" size="small" color="primary"
+                                                @click="pesquisar()"></v-btn>
+                                        </v-col>
+                                    </v-row>
 
-                                <p v-if="found.length != 0">{{ (found.nomecliente) }}/ CPF: {{ found.cpf }}</p>
-                                <p v-if="noresults">Nenhum cliente cadastrado com esse nome</p>
+                                    <p v-if="found.length != 0">{{ (found.nomecliente) }}/ CPF: {{ found.cpf }}</p>
+                                    <p v-if="noresults">Nenhum cliente cadastrado com esse nome</p>
                                 </div>
 
 
@@ -232,9 +256,20 @@ export default {
         reset() {
             this.$refs.form.reset()
         },
-        resetValidation() {
-            this.$refs.form.resetValidation()
-        },
+
+
+
+
+    },
+    mounted() {
+        if (localStorage.getItem('cliente')) {
+            try {
+                this.cliente = JSON.parse(localStorage.getItem('cliente'));
+            } catch (e) {
+                localStorage.removeItem('cliente');
+            }
+
+        }
     },
 }
 </script>
