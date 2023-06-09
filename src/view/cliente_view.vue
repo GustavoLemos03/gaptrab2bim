@@ -14,7 +14,7 @@
                                     <div class="d-flex flex-no-wrap justify-space-between">
                                         <div>
                                             <v-card-title class="text-h5">
-                                                {{ i.nomecliente }}
+                                                {{ i.nomecliente.toUpperCase() }}
                                             </v-card-title>
 
                                             <v-card-text>
@@ -41,7 +41,7 @@
                                 </v-card>
 
                                 <div class="ml-7 mt-15">
-                                    <h3> Pesquisar </h3>
+                                    <h3> Pesquisar por nome do cliente </h3>
                                     <v-row>
                                         <v-col cols="10">
                                             <v-form ref="form">
@@ -84,7 +84,7 @@
 
 
                                 <div class="ml-7 mt-15">
-                                    <h3> Pesquisar </h3>
+                                    <h3> Pesquisar por nome do cliente </h3>
                                     <v-row>
                                         <v-col cols="10">
                                             <v-form ref="form">

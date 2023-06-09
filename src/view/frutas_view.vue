@@ -15,7 +15,7 @@
                                     <div class="d-flex flex-no-wrap justify-space-between">
                                         <div>
                                             <v-card-title class="text-h6">
-                                                {{ i.item }}
+                                                {{ (i.item).toUpperCase() }}
                                             </v-card-title>
 
                                             <v-card-subtitle> Quantidade: {{ i.qtd }}</v-card-subtitle>
@@ -80,7 +80,7 @@
                         </v-row>
                         <v-row justify="start">
                             <v-col cols="5" class="ml-15 mt-5">
-                                <h3> Pesquisar </h3>
+                                <h3> Pesquisar por nome da fruta </h3>
                                 <v-row>
                                     <v-col cols="10">
                                         <v-form ref="form">
@@ -155,8 +155,8 @@ export default {
 
             }
 
-            this.item = ''
-            this.qtd = ''
+            this.item = null
+            this.qtd = null
             this.alter = false
         },
         removeItem(index) {
