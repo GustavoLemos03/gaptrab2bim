@@ -7,14 +7,15 @@
                 <v-col cols="12" sm="12">
 
                     <v-sheet min-height="100vh" rounded="lg" class="pa-12">
-
+                        
                         <v-row justify="space-around">
                             <v-col cols="5" v-if="cliente.length != 0">
+                                <h3>Todos os clientes</h3>
                                 <v-card width="400" v-for="i in cliente" :key="i" class="ma-3 bg-grey-lighten-3">
                                     <div class="d-flex flex-no-wrap justify-space-between">
                                         <div>
                                             <v-card-title class="text-h5">
-                                                {{ i.nomecliente }}
+                                                {{ i.nomecliente.toUpperCase() }}
                                             </v-card-title>
 
                                             <v-card-text>
@@ -41,7 +42,7 @@
                                 </v-card>
 
                                 <div class="ml-7 mt-15">
-                                    <h3> Pesquisar </h3>
+                                    <h3> Pesquisar por nome do cliente </h3>
                                     <v-row>
                                         <v-col cols="10">
                                             <v-form ref="form">
@@ -84,7 +85,7 @@
 
 
                                 <div class="ml-7 mt-15">
-                                    <h3> Pesquisar </h3>
+                                    <h3> Pesquisar por nome do cliente </h3>
                                     <v-row>
                                         <v-col cols="10">
                                             <v-form ref="form">
