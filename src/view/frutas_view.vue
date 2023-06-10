@@ -18,7 +18,7 @@
                                                 {{ (i.item).toUpperCase() }}
                                             </v-card-title>
 
-                                            <v-card-subtitle> Quantidade: {{ i.qtd }}</v-card-subtitle>
+                                            <v-card-subtitle> Código #{{i.cod}}<br>Quantidade: {{ i.qtd }}</v-card-subtitle>
 
                                             <v-card-actions>
                                                 <v-btn class="ms-2" icon="mdi-delete" variant="text"
@@ -80,12 +80,12 @@
                         </v-row>
                         <v-row justify="start">
                             <v-col cols="5" class="ml-15 mt-5">
-                                <h3> Pesquisar por nome da fruta </h3>
+                                <h3> Pesquisar por código da fruta </h3>
                                 <v-row>
                                     <v-col cols="10">
                                         <v-form ref="form">
-                                            <v-text-field v-model="name" label="Nome da fruta" variant="underlined"
-                                                required id="name"></v-text-field>
+                                            <v-text-field v-model="cod_pesq" label="Código da fruta" variant="underlined"
+                                                required id="cod_pesq"></v-text-field>
 
 
                                         </v-form>
@@ -129,7 +129,8 @@ export default {
         frutas: [],
         cod: '',
         found:[],
-        noresults:false
+        noresults:false,
+        cod_pesq:''
     }),
 
     methods: {
@@ -177,7 +178,7 @@ export default {
 
         },
         pesquisar() {
-            var search = this.frutas.find(e => e.item == this.name);
+            var search = this.frutas.find(e => e.cod == this.cod_pesq);
 
             if(search!=undefined){
                 this.found = search
