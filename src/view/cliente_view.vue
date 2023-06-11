@@ -17,7 +17,7 @@
                                             <v-card-title class="text-h5">
                                                 {{ i.nomecliente.toUpperCase() }}
                                             </v-card-title>
-
+                                            <v-card-subtitle>Código #{{ i.cod }}</v-card-subtitle>
                                             <v-card-text>
                                                 <p>CPF: {{ i.cpf }}</p>
                                                 <p>email: {{ i.email }}</p>
@@ -42,11 +42,11 @@
                                 </v-card>
 
                                 <div class="ml-7 mt-15">
-                                    <h3> Pesquisar por nome do cliente </h3>
+                                    <h3> Pesquisar por código do cliente </h3>
                                     <v-row>
                                         <v-col cols="10">
                                             <v-form ref="form">
-                                                <v-text-field v-model="pesq" label="Nome do cliente" variant="underlined"
+                                                <v-text-field v-model="pesq" label="Código do cliente" variant="underlined"
                                                     required id="pesq"></v-text-field>
 
 
@@ -59,8 +59,10 @@
                                         </v-col>
                                     </v-row>
 
-                                    <p v-if="found.length != 0">{{ (found.nomecliente) }}/ CPF: {{ found.cpf }}</p>
-                                    <p v-if="noresults">Nenhum cliente cadastrado com esse nome</p>
+                                    <p v-if="found.length != 0"><b>Cliente #{{ (found.cod) }}<br></b> <b>Cliente: </b>{{ (found.nomecliente).toUpperCase() }}/ <b>CPF:</b> {{ found.cpf }}<br>
+                                        <b>Rua: </b>{{ found.rua }} <b>N°</b> {{ found.numero }}, {{ found.cidade }}<br>
+                                        <b>Telefone:</b> {{ found.telefone }}/ <b>Email: </b>{{ found.email }}</p>
+                                    <p v-if="noresults">Nenhum cliente cadastrado com esse código</p>
                                 </div>
 
                             </v-col>
@@ -89,7 +91,7 @@
                                     <v-row>
                                         <v-col cols="10">
                                             <v-form ref="form">
-                                                <v-text-field v-model="pesq" label="Nome do cliente" variant="underlined"
+                                                <v-text-field v-model="pesq" label="Código do cliente" variant="underlined"
                                                     required id="pesq"></v-text-field>
 
 
@@ -102,8 +104,12 @@
                                         </v-col>
                                     </v-row>
 
-                                    <p v-if="found.length != 0">{{ (found.nomecliente) }}/ CPF: {{ found.cpf }}</p>
-                                    <p v-if="noresults">Nenhum cliente cadastrado com esse nome</p>
+                                    <p v-if="found.length != 0"><b>Cliente #{{ (found.cod) }}</b><br> <b>Cliente: </b>{{ (found.nomecliente).toUpperCase() }}/ <b>CPF:</b> {{ found.cpf }}<br>
+                                        <b>Rua: </b>{{ found.rua }} <b>N°</b> {{ found.numero }}, {{ found.cidade }}<br>
+                                        <b>Telefone:</b> {{ found.telefone }}/ <b>Email: </b>{{ found.email }}
+
+                                    </p>
+                                    <p v-if="noresults">Nenhum cliente cadastrado com esse código</p>
                                 </div>
 
 
@@ -184,6 +190,7 @@ export default {
         cod: '',
         pesq: '',
         found: [],
+        i:1,
         noresults: false
     }),
 
@@ -194,14 +201,14 @@ export default {
         },
         addList() {
 
-
+            
             if (this.alter == false) {
-                this.cliente.push({ cod: this.cliente.length + 1, nomecliente: this.nomecliente, cpf: this.cpf, email: this.email, telefone: this.telefone, rua: this.rua, numero: this.numero, cidade: this.cidade })
-
+                this.cliente.push({ cod: this.i++, nomecliente: this.nomecliente, cpf: this.cpf, email: this.email, telefone: this.telefone, rua: this.rua, numero: this.numero, cidade: this.cidade })
+               
                 this.save();
             } else {
                 var index_edit = this.cliente.findIndex((x) => x.cod === this.cod);
-                this.cliente[index_edit] = { cod: this.cliente.length + 1, nomecliente: this.nomecliente, cpf: this.cpf, email: this.email, telefone: this.telefone, rua: this.rua, numero: this.numero, cidade: this.cidade }
+                this.cliente[index_edit] = { cod: this.cod, nomecliente: this.nomecliente, cpf: this.cpf, email: this.email, telefone: this.telefone, rua: this.rua, numero: this.numero, cidade: this.cidade }
                 this.alter = true;
                 this.save();
             }
@@ -213,7 +220,7 @@ export default {
             this.telefone = null;
             this.numero = null;
             this.cidade = null;
-
+            this.alter=false;
 
 
         },
@@ -238,7 +245,7 @@ export default {
             this.cidade = this.cliente[index_edit].cidade;
         },
         pesquisar() {
-            var search = this.cliente.find(e => e.nomecliente == this.pesq);
+            var search = this.cliente.find(e => e.cod == this.pesq);
 
             if (search != undefined) {
                 this.found = search
