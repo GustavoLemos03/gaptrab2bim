@@ -160,7 +160,8 @@ export default {
         cliente: [],
         found: [],
         pesq: '',
-        name: ''
+        name: '',
+        i:1
     }),
 
     methods: {
@@ -176,11 +177,11 @@ export default {
 
 
             if (this.alter == false) {
-                this.lista.push({ fruta: this.frutas[index_fruta].item, cod_fruta: this.select, cliente: this.cliente[index_cliente].nomecliente, cod_cliente: this.select2, cod: this.lista.length + 1, qtd: this.qtd, data: this.data, rua: this.cliente[index_cliente].rua, numero: this.cliente[index_cliente].numero, cidade: this.cliente[index_cliente].cidade })
+                this.lista.push({cod: this.i++, fruta: this.frutas[index_fruta].item, cod_fruta: this.select, cliente: this.cliente[index_cliente].nomecliente, cod_cliente: this.select2,  qtd: this.qtd, data: this.data, rua: this.cliente[index_cliente].rua, numero: this.cliente[index_cliente].numero, cidade: this.cliente[index_cliente].cidade })
                 this.save();
             } else {
                 var index_edit = this.lista.findIndex((x) => x.cod === this.cod);
-                this.lista[index_edit] = { fruta: this.frutas[index_fruta].item, cod_fruta: this.select, cliente: this.cliente[index_cliente].nomecliente, cod_cliente: this.select2, cod: this.lista.length + 1, qtd: this.qtd, data: this.data, rua: this.cliente[index_cliente].rua, numero: this.cliente[index_cliente].numero, cidade: this.cliente[index_cliente].cidade }
+                this.lista[index_edit] = { fruta: this.frutas[index_fruta].item, cod_fruta: this.select, cliente: this.cliente[index_cliente].nomecliente, cod_cliente: this.select2, cod: this.cod, qtd: this.qtd, data: this.data, rua: this.cliente[index_cliente].rua, numero: this.cliente[index_cliente].numero, cidade: this.cliente[index_cliente].cidade }
                 this.alter = true;
                 this.save();
             }
@@ -190,6 +191,7 @@ export default {
             this.select2 = null
             this.qtd = null
             this.data = null
+            this.alter = false
         },
         removeItem(index) {
             var index_remove = this.lista.findIndex((x) => x.cod === index);

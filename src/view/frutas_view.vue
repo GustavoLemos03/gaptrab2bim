@@ -96,8 +96,8 @@
                                     </v-col>
                                 </v-row>
 
-                                <p v-if="found.length!=0">{{ (found.item) }}/ Quantidade: {{ found.qtd }}</p>
-                                <p v-if="noresults">Nenhuma fruta cadastrada com esse nome</p>
+                                <p v-if="found.length!=0">#{{ (found.cod) }} {{ (found.item).toUpperCase() }}/ Quantidade: {{ found.qtd }}</p>
+                                <p v-if="noresults">Nenhuma fruta cadastrada com esse código</p>
 
                             </v-col>
                         </v-row>
@@ -130,7 +130,8 @@ export default {
         cod: '',
         found:[],
         noresults:false,
-        cod_pesq:''
+        cod_pesq:'',
+        i:1
     }),
 
     methods: {
@@ -143,7 +144,7 @@ export default {
 
             if (this.qtd != '' && this.item != '') {
                 if (this.alter == false) {
-                    this.frutas.push({ item: this.item, qtd: this.qtd, cod: this.frutas.length + 1 })
+                    this.frutas.push({ item: this.item, qtd: this.qtd, cod: this.i++ })
 
                     this.save();
                 } else {
