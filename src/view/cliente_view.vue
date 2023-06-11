@@ -59,7 +59,7 @@
                                         </v-col>
                                     </v-row>
 
-                                    <p v-if="found.length != 0"><b>Pedido #{{ (found.cod) }}<br></b> <b>Cliente: </b>{{ (found.nomecliente).toUpperCase() }}/ <b>CPF:</b> {{ found.cpf }}<br>
+                                    <p v-if="found.length != 0"><b>Cliente #{{ (found.cod) }}<br></b> <b>Cliente: </b>{{ (found.nomecliente).toUpperCase() }}/ <b>CPF:</b> {{ found.cpf }}<br>
                                         <b>Rua: </b>{{ found.rua }} <b>N°</b> {{ found.numero }}, {{ found.cidade }}<br>
                                         <b>Telefone:</b> {{ found.telefone }}/ <b>Email: </b>{{ found.email }}</p>
                                     <p v-if="noresults">Nenhum cliente cadastrado com esse código</p>
@@ -104,7 +104,7 @@
                                         </v-col>
                                     </v-row>
 
-                                    <p v-if="found.length != 0"><b>Pedido #{{ (found.cod) }}</b><br> <b>Cliente: </b>{{ (found.nomecliente).toUpperCase() }}/ <b>CPF:</b> {{ found.cpf }}<br>
+                                    <p v-if="found.length != 0"><b>Cliente #{{ (found.cod) }}</b><br> <b>Cliente: </b>{{ (found.nomecliente).toUpperCase() }}/ <b>CPF:</b> {{ found.cpf }}<br>
                                         <b>Rua: </b>{{ found.rua }} <b>N°</b> {{ found.numero }}, {{ found.cidade }}<br>
                                         <b>Telefone:</b> {{ found.telefone }}/ <b>Email: </b>{{ found.email }}
 
