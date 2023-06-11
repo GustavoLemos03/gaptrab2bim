@@ -55,7 +55,7 @@
                                         </v-col>
                                     </v-row>
 
-                                    <p v-if="found.length != 0"> <b>Pedido #{{ found.cod }}</b><br>
+                                    <p v-if="found.length != 0"> <b>Pedido N° #{{ found.cod }}</b><br>
                                     <b>Cliente: </b> {{ found.cliente }}<br>
                                     <b>Fruta encomendada: </b> {{ found.fruta }}/ Quantidade: {{
                                         found.qtd }}<br>
@@ -97,7 +97,7 @@
                                         </v-col>
                                     </v-row>
 
-                                    <p v-if="found.length != 0"> <b>Pedido #{{ found.cod }}</b><br>
+                                    <p v-if="found.length != 0"> <b>Pedido  N° #{{ found.cod }}</b><br>
                                     <b>Cliente: </b> {{ found.cliente }}<br>
                                     <b>Fruta encomendada: </b> {{ found.fruta }}/ Quantidade: {{
                                         found.qtd }}<br>
