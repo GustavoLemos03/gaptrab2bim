@@ -55,8 +55,11 @@
                                         </v-col>
                                     </v-row>
 
-                                    <p v-if="found.length != 0"> {{ (found.cliente).toUpperCase() }}: {{ found.fruta }}/ Quantidade: {{
-                                        found.qtd }} <br> Entrega: {{ found.data }}
+                                    <p v-if="found.length != 0"> <b>Pedido N° #{{ found.cod }}</b><br>
+                                    <b>Cliente: </b> {{ found.cliente }}<br>
+                                    <b>Fruta encomendada: </b> {{ found.fruta }}/ Quantidade: {{
+                                        found.qtd }}<br>
+                                        <b>Data de entrega:</b> {{ found.data }}
                                     </p>
                                     <p v-if="noresults">Nenhuma encomenda com esse número de pedido</p>
 
@@ -94,8 +97,11 @@
                                         </v-col>
                                     </v-row>
 
-                                    <p v-if="found.length != 0"> {{ found.cliente }}: {{ found.fruta }}/ Quantidade: {{
-                                        found.qtd }}
+                                    <p v-if="found.length != 0"> <b>Pedido  N° #{{ found.cod }}</b><br>
+                                    <b>Cliente: </b> {{ found.cliente }}<br>
+                                    <b>Fruta encomendada: </b> {{ found.fruta }}/ Quantidade: {{
+                                        found.qtd }}<br>
+                                        <b>Data de entrega:</b> {{ found.data }}
                                     </p>
                                     <p v-if="noresults">Nenhuma encomenda com esse número de pedido</p>
 
